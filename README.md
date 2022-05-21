@@ -1,5 +1,9 @@
 # NodeJS Webscraper
-Demo for showing how to scrape data and get backend data to the frontend. This repository is for the video tutorial [here](https://youtu.be/-3lqUHeZs_0)
+Extension of boilerplate webscraper by Ania Kubow
+
+## Goal
+
+To provide a scraped collection of sites for protesting, combined into one place
 
 
 ## To run this project
@@ -24,7 +28,7 @@ npm run start
 
 ## MIT Licence
 
-Copyright (c) 2020 Ania Kubow
+Copyright (c) 2022 Ian Laffey
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
