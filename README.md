@@ -3,7 +3,9 @@ Extension of boilerplate webscraper by Ania Kubow
 
 ## Goal
 
-To provide a scraped collection of sites for protesting, combined into one place
+To provide a scraped collection of sites for activism, combined into one place
+
+The aim is to be FUNCTIONAL! I'm not particularly concerned with a nice UI, however maybe I (or someone else) will add a frontend at some point, however I think currently its better to invest time into scraping more sites
 
 
 ## To run this project
@@ -25,6 +27,15 @@ npm run start
 3. Open [http://localhost:8000/results](http://localhost:8000/results) with your browser to see the results of the scrape in your terminal.
 
 4. Finally, open the index.html file in your browser to see the results showing up.
+
+## Contributing
+
+Feel free to submit a pull request! I am new to web-scraping, and not an expert in javascript, so feedback is always appreciated! :D 
+
+To add a site, scrape the event info from an organization into a JSON, then create a new page for it- have that page return the JSON of events.
+
+Then, link that site on the main page!
+
 
 ## MIT Licence
 
