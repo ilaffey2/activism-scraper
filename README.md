@@ -1,4 +1,4 @@
-# NodeJS Webscraper
+# Activism HUB
 Extension of boilerplate webscraper by Ania Kubow
 
 ## Goal
