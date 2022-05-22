@@ -7,17 +7,20 @@ const cors = require('cors')
 app.use(cors())
 
 const pp_delaware_url = 'https://www.plannedparenthood.org/planned-parenthood-delaware/events'
+//Determine this programatically? ?? How ? ??!
+const womans_march_url = 'https://zen-hypatia-739ed6.netlify.app/feed'
 
 app.get('/', function (req, res) {
     res.json('This is my webscraper')
 })
 
 app.get('/results', (req, res) => {
+    const articles = []
     axios(pp_delaware_url)
         .then(response => {
             const html = response.data
             const $ = cheerio.load(html)
-            const articles = []
+            
 
             $('.page-content', html).each(function () { //<-- cannot be a function expression
                 
@@ -44,6 +47,42 @@ app.get('/results', (req, res) => {
             res.json(articles)
  //           console.log(html)
         }).catch(err => console.log(err))
+    //    res.json(articles)
+
+})
+
+app.get('/results2', (req, res) => {
+    const articles = []
+    const config = {
+        
+    }
+    axios('https://zen-hypatia-739ed6.netlify.app/feed')
+        .then(response => {
+            const data = response.data
+ //           const text = cheerio.load(data).text()        
+            const parsed_data = data.events.map(function(e) 
+            {
+               return { 
+                    'title' : e.title,
+                    'description' : e.public_description,
+                    'city' : e.city,
+                    'state' : e.state,
+                    'zip' : e.zip,
+                    'start' : e.start_datetime
+                }
+            }
+            )
+
+            articles.push(parsed_data)
+            
+
+            
+ //           articles.push(children)
+            res.json(articles)
+ //           console.log(data.events)
+       //     console.log(typeof json)
+        }).catch(err => console.log(err))
+    //    res.json(articles)
 
 })
 
