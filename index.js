@@ -18,8 +18,8 @@ const retihinking_schools_url = 'https://rethinkingschools.org/events/'
 app.get('/', function (req, res) {
     res.send(' <body style="background-color:18181a"> \
     <a href="/results0">Planned Parenthood Delaware</a> <br> \
-      <a href="/results1">Womens March</a> \
-      <a href="/results2">Rethinking Schools \
+      <a href="/results1">Womens March</a> <br>\
+      <a href="/results2">Rethinking Schools</a> <br> \
       </body>')
 })
 
