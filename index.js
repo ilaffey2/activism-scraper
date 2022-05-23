@@ -6,15 +6,24 @@ const app = express()
 const cors = require('cors')
 app.use(cors())
 
+//Should have better standardization of names for JSON to allow for better of results
+//Should break index.js up into smaller applications
+
 const pp_delaware_url = 'https://www.plannedparenthood.org/planned-parenthood-delaware/events'
-//Determine this programatically? ?? How ? ??!
+//Use puppeteer to get this instead of relying on hosting being static?
 const womans_march_url = 'https://zen-hypatia-739ed6.netlify.app/feed'
 
+const retihinking_schools_url = 'https://rethinkingschools.org/events/'
+
 app.get('/', function (req, res) {
-    res.json('This is my webscraper')
+    res.send(' <body style="background-color:18181a"> \
+    <a href="/results0">Planned Parenthood Delaware</a> <br> \
+      <a href="/results1">Womens March</a> \
+      <a href="/results2">Rethinking Schools \
+      </body>')
 })
 
-app.get('/results', (req, res) => {
+app.get('/results0', (req, res) => {
     const articles = []
     axios(pp_delaware_url)
         .then(response => {
@@ -30,7 +39,7 @@ app.get('/results', (req, res) => {
                 const foo2 = title.replace(foo, "")
                 $('p', foo2).each(function () {
                     const text0 = $(this).html().replace(/<br>/g, "         ")
-                    console.log(text0)
+                   // console.log(text0)
                     const text = cheerio.load(text0).text()
                     const title = $('strong', this).text()
                     const info = text.replace(title, "")
@@ -51,12 +60,12 @@ app.get('/results', (req, res) => {
 
 })
 
-app.get('/results2', (req, res) => {
+app.get('/results1', (req, res) => {
     const articles = []
     const config = {
         
     }
-    axios('https://zen-hypatia-739ed6.netlify.app/feed')
+    axios(womans_march_url)
         .then(response => {
             const data = response.data
  //           const text = cheerio.load(data).text()        
@@ -86,6 +95,53 @@ app.get('/results2', (req, res) => {
 
 })
 
+
+app.get('/results2', (req, res) => {
+    const articles = []
+    flag = false
+    
+    axios(retihinking_schools_url)
+        .then(response => {
+            if (flag){
+                return
+            }
+            const html = response.data
+            const $ = cheerio.load(html)
+            
+
+            $('script', html).each(function () {
+            if (!this.attribs || !this.attribs.type || this.attribs.class == 'yoast-schema-graph' /*<SEO bullshit*/) {
+                return
+            }
+            if (this.attribs.type == 'application/ld+json'){
+
+                const data = this.children
+                const json = JSON.parse( $(data).text())
+
+                const parsed_data = json.map(function(e) 
+                {
+                    flag = true
+                    return { 
+                            "title" : e.name,
+                            "description" : e.description,
+                            "url" : e.url,
+                            "startDate" : e.startDate
+                        }
+                    }
+                )
+                
+                articles.push(parsed_data)
+                console.log(articles)
+                res.json(articles)
+            }
+            
+
+        //    console.log(this)
+            })
+        }).catch(err => console.log(err))
+        
+        
+})
 
 
 app.listen(PORT, () => console.log(`server running on PORT ${PORT}`))

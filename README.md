@@ -1,6 +1,7 @@
 # Activism HUB
 Extension of boilerplate webscraper by Ania Kubow
 
+My first time messing around with webscraping, but hopefully useful for people!
 ## Goal
 
 To provide a scraped collection of sites for activism, combined into one place
