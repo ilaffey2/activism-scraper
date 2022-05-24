@@ -2,6 +2,10 @@
 Extension of boilerplate webscraper by Ania Kubow
 
 My first time messing around with webscraping, but hopefully useful for people!
+
+Currently I have spun up a website using Heroku. If this scales maybe we will use something else?
+
+www.activism-hub.com
 ## Goal
 
 To provide a scraped collection of sites for activism, combined into one place
